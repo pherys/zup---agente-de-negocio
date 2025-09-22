@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Plano de Negócio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Mini Plano de Negócio</h1>
+        <p class="subtitle">com StackSpot IA</p>
+
+        <div class="info-box">
+            <p>Escreva o tipo de empresa que você quer abrir e clique em <strong>Gerar Mini Plano</strong> para receber público-alvo, custos estimados e estratégia de marketing.</p>
+        </div>
+
+        <form id="business-form">
+            <label for="business-input">O que você quer abrir?</label>
+            <input type="text" id="business-input" placeholder="Ex: cafeteria temática, pet shop, loja de roupas fitness...">
+            <button type="submit" id="generate-button">
+                💡 Gerar Mini Plano
+            </button>
+        </form>
+
+        <div id="response-container" class="hidden">
+            </div>
+
+    </div>
+    <footer class="footer">
+        Powered by StackSpot IA © 2024
+    </footer>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

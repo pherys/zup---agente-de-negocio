@@ -2,6 +2,55 @@ import os
 import streamlit as st
 import requests
 
+from flask import Flask, request, jsonify
+
+# Se o seu agente precisa de outras bibliotecas, importe-as aqui
+# Ex: from openai import OpenAI
+
+app = Flask(__name__)
+
+# Esta é a rota da sua API. O frontend vai chamar este endpoint.
+@app.route('/api/agente', methods=['POST'])
+def handle_agent_request():
+    try:
+        # 1. Recebe os dados enviados pelo frontend (o tipo de empresa)
+        data = request.json
+        business_idea = data.get('business_idea')
+
+        if not business_idea:
+            return jsonify({"error": "Nenhuma ideia de negócio foi fornecida"}), 400
+
+        # --- SUA LÓGICA DO AGENTE ENTRA AQUI ---
+        #
+        # Substitua o código de exemplo abaixo pela lógica real do seu `agente.py`.
+        # Você provavelmente tem uma função que recebe a `business_idea` como
+        # entrada e retorna o plano de negócio como texto.
+        #
+        # Exemplo de como chamar sua função:
+        # plano_de_negocio = sua_funcao_do_agente(business_idea)
+        
+        # Simplesmente para demonstração, vamos retornar um texto formatado.
+        plano_de_negocio = (
+            f"### Mini Plano para: {business_idea.title()} ###\n\n"
+            "**Público-Alvo:**\n"
+            "Jovens adultos entre 20-35 anos, interessados em produtos sustentáveis e artesanais.\n\n"
+            "**Custos Estimados:**\n"
+            "- Aluguel e Reforma: R$ 15.000\n"
+            "- Equipamentos: R$ 8.000\n"
+            "- Marketing Inicial: R$ 5.000\n\n"
+            "**Estratégia de Marketing:**\n"
+            "Foco em marketing de influência no Instagram e parcerias com comércios locais."
+        )
+        # --- FIM DA LÓGICA DO AGENTE ---
+
+        # 2. Retorna a resposta em formato JSON para o frontend
+        return jsonify({"business_plan": plano_de_negocio})
+
+    except Exception as e:
+        # Em caso de erro, retorna uma mensagem clara
+        return jsonify({"error": str(e)}), 500
+
+# O Vercel gerencia o servidor, então não precisamos de if __name__ == '__main__':
 # Dados de autenticação (NUNCA coloque a chave diretamente no código)
 REALM = "stackspot-freemium"
 CLIENT_ID = os.getenv("CLIENT_ID")  # Defina no ambiente do Streamlit Cloud!
